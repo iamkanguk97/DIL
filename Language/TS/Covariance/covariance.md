@@ -95,4 +95,77 @@ type T4 = IsSubtypeOf<{ a: string | number; b: number }, { a: string; b: number 
 
 ## 반공변성(Contravariance)
 
-TBU
+![](./images/contravariance.png)
+
+> -   A(좁은타입)가 B(넓은타입)의 서브타입이면, `T<B>`는 `T<A>`의 서브타입입니다.
+> -   A ⊂ B → T<B> ⊂ T<A>
+> -   **공변성 규칙이 `함수의 매개변수`로 전달된 경우 반대로 동작한다.**
+
+```ts
+type Logger<T> = (param: T) => void;
+
+let logNumber: Logger<number> = param => {
+    console.log(param);
+};
+
+let log: Logger<string | number> = param => {
+    console.log(param);
+};
+
+logNumber = log; // OK
+log = logNumber; // ERROR
+```
+
+**공변성의 규칙을 따르면 `log` 함수는 `string | number` 타입으로 넓은 타입, `logNumber` 함수는 `number` 타입으로 보다 좁은 타입입니다. 따라서 `log = logNumber` 타입이 성립되어야 하는데 에러가 발생합니다.**
+
+**이에 대한 이유는 함수의 매개변수의 타입을 다룰 때 반공변성으로 따르기 때문입니다. 그렇기 때문에 `logNumber = log`가 성립합니다.**
+
+## 함수에서의 공변성과 반공변성
+
+![](./images/function-covariance.png)
+
+> [!IMPORTANT]
+>
+> -   함수의 리턴값 타입은 공변성을 가집니다.
+> -   함수의 매개변수 타입은 반공변성을 가집니다.
+> -   단, tsconfig.json에서 strictFunctionTypes 옵션이 활성화 되어야 합니다.
+
+```ts
+// T가 좁은타입, P가 넓은타입
+type IsSubTypeOf<T, P> = T extends P ? true : false;
+
+function param1(x: string): number {
+    return +x;
+}
+function param2(x: string | number | boolean): number {
+    return +x;
+}
+
+function return1(x: string): number {
+    return +x;
+}
+function return2(x: string): number | string | boolean {
+    return +x;
+}
+
+type T1 = IsSubTypeOf<typeof param1, typeof param2>; // false
+type T2 = IsSubTypeOf<typeof param2, typeof param1>; // true
+
+type T3 = IsSubTypeOf<typeof return1, typeof return2>; // true
+type T4 = IsSubTypeOf<typeof return2, typeof return1>; // false
+```
+
+## 이변성 (Bi-variance)
+
+> -   **TypeScript는 기본적으로는 함수의 인자를 다루는 과정에서 이변성 구조를 가지고 있습니다. 다시 말해, 공변성과 반공변성을 동시에 가지고 있습니다.**
+> -   **이런 함수 인자가 이변성이라는 오류를 바로잡아서 위의 반공변적이게 바꿔주는 옵션이 tsconfig.json의 strictFunctionTypes 옵션입니다.**
+
+기본적으로 매개변수가 이변성을 가지는 이유는 리턴값은 공변성을 가지는데 매개변수는 반공변성을 가짐으로 인해서 생기는 문제들이 많이 때문입니다.
+
+---
+
+## References
+
+-   [[번역] 타입스크립트의 공변성과 반공변성](https://medium.com/@yujso66/%EB%B2%88%EC%97%AD-%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98-%EA%B3%B5%EB%B3%80%EC%84%B1%EA%B3%BC-%EB%B0%98%EA%B3%B5%EB%B3%80%EC%84%B1-82139f7e5cc3)
+-   [타입스크립트 공변성과 반공변성 핵심 이해하기](https://inpa.tistory.com/entry/TS-%F0%9F%93%98-%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EA%B3%B5%EB%B3%80%EC%84%B1-%EB%B0%98%EA%B3%B5%EB%B3%80%EC%84%B1-%F0%9F%92%A1-%ED%95%B5%EC%8B%AC-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0)
+-   [TypeScript 공변성과 반공변성](https://www.zerocho.com/category/TypeScript/post/5faa8c657753bd00048a27d8)

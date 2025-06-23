@@ -1,5 +1,4 @@
 {
-    "java.project.sourcePaths": ["src/main/java"],
-    "java.project.outputPath": "bin",
-    "java.compile.nullAnalysis.mode": "automatic"
-} 
+    "java.project.sourcePaths": ["java/src/main/java"],
+    "java.project.outputPath": "java/build/classes"
+}

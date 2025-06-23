@@ -1,7 +1,5 @@
 {
-    "java.project.sourcePaths": [
-        "OOP/오브젝트/Chapter01/example/src/main/java"
-    ],
+    "java.project.sourcePaths": ["OOP/오브젝트/Chapter01/example/java/src/main/java"],
     "java.project.referencedLibraries": [],
     "java.compile.nullAnalysis.mode": "automatic"
-} 
+}

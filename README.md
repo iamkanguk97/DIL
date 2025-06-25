@@ -7,26 +7,27 @@
 -   [학습 카테고리](#학습-카테고리)
     -   [Computer Science](#computer-science)
         -   [Operating System (운영체제)](#operating-system-운영체제)
+    - [DB](#db)
+        - [MySQL](#mysql)
     -   [Language](#language)
         -   [JavaScript](#javascript)
-            -   [JavaScript Object.freeze()와 Object.seal()](./Language/JS/freeze-and-seal.md)
         -   [TypeScript](#typescript)
-            -   [Type과 Interface의 차이](./Language/TS/type-and-interface.md)
-            -   [타입스크립트 공변성과 반공변성](./Language/TS/Covariance/covariance.md)
     -   [Linux](#linux)
-        -   [SSH (Secure Shell)](./Linux/ssh.md)
     -   [Node.js](#nodejs)
-        -   [HTTP Chunk](./Node.js/http-chunk.md)
     -   [OOP (Object-Oriented Programming)](#oop-object-oriented-programming)
-        -   [객체지향의 사실과 오해](#객체지향의-사실과-오해)
     -   [Security](#security)
-        -   [대칭키 암호화와 비대칭키 암호화, 그리고 하이브리드 암호화](./Security/Symmetric-Asymmetric-Key.md)
 
 ## Computer Science
 
 ### Operating System (운영체제)
 
 -   [동시성(Concurrency)과 병렬성(Parallelism)](./CS/Operating%20System/Concurrency-and-Parallelism.md)
+
+## DB
+
+### MySQL
+
+-   [MySQL COUNT와 EXISTS 함수 성능 비교](./DB/MySQL/count-and-exists.md)
 
 ## Language
 
@@ -52,6 +53,10 @@
 ### 객체지향의 사실과 오해
 
 -   [챕터01: 협력하는 객체들의 공동체](./OOP/객체지향의%20사실과%20오해/Chapter01/Chapter01.md)
+-   [챕터02: 이상한 나라의 객체](./OOP/객체지향의%20사실과%20오해/Chapter02/Chapter02.md)
+-   [챕터03: 타입과 추상화](./OOP/객체지향의%20사실과%20오해/Chapter03/Chapter03.md)
+-   [챕터04: 역할, 책임, 협력](./OOP/객체지향의%20사실과%20오해/Chapter04/Chapter04.md)
+-   [챕터05: 책임과 메세지](./OOP/객체지향의%20사실과%20오해/Chapter05/Chapter05.md)
 
 ## Security
 

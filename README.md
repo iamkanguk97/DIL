@@ -56,3 +56,17 @@
 ## Security
 
 -   [대칭키 암호화와 비대칭키 암호화, 그리고 하이브리드 암호화](./Security/Symmetric-Asymmetric-Key.md)
+
+---
+
+## 좋은 자료 링크
+
+### NestJS
+
+-   [5 Steps to Create a Bare Minimum NestJS App from Scratch](https://dev.to/micalevisk/5-steps-to-create-a-bare-minimum-nestjs-app-from-scratch-5c3b)
+-   [NestJS: from Promises to Observables](https://dev.to/onepoint/nestjs-from-promises-to-observables-2gl7)
+-   [NestJS: Leveraging RxJS Common Use Cases](https://www.linkedin.com/pulse/nestjs-leveraging-rxjs-common-use-cases-guan-xin-wang-dksmc/)
+
+### 라이브러리
+
+-   [RxJS 한번 배워보실래요?](https://velog.io/@teo/rxjs)

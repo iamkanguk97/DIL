@@ -7,8 +7,8 @@
 -   [학습 카테고리](#학습-카테고리)
     -   [Computer Science](#computer-science)
         -   [Operating System (운영체제)](#operating-system-운영체제)
-    - [DB](#db)
-        - [MySQL](#mysql)
+    -   [DB](#db)
+        -   [MySQL](#mysql)
     -   [Language](#language)
         -   [JavaScript](#javascript)
         -   [TypeScript](#typescript)
@@ -49,6 +49,8 @@
 -   [HTTP Chunk](./Node.js/http-chunk.md)
 
 ## OOP (Object-Oriented Programming)
+
+-   [OCP(Open-Closed Principle): 개방-폐쇄 원칙](./OOP/OCP.md)
 
 ### 객체지향의 사실과 오해
 

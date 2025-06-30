@@ -36,7 +36,7 @@ function statement(invoice, plays) {
    * @param {Object} play 기본 공연 정보
    * @returns {number} 공연 요금
    */
-  function amountFor(performance, play) {
+  function amountFor(performance) {
     let result = 0;
 
     switch (playFor(performance).type) {   // 변수 인라인
@@ -61,7 +61,7 @@ function statement(invoice, plays) {
   }
 
   for (let perf of invoice.performances) {
-    let thisAmount = amountFor(perf, playFor(perf)); // 해당 부분 별도 함수를 사용해서 값 추출!
+    let thisAmount = amountFor(perf); // 해당 부분 별도 함수를 사용해서 값 추출!
 
     volumeCredits += Math.max(perf.audience - 30, 0); // 포인트 적립
     if (playFor(perf).type === 'comedy')

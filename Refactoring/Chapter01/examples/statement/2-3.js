@@ -1,31 +1,33 @@
 /**
- * 2-3) 변수명 변경: thisAmount -> result로 변경
+ * 2-3) 변수명 변경
+ * - thisAmount -> result로 변경
+ * - perf -> performance로 변경 (책에서는 aPerformance로 변경하지만 필자는 별로 와닿지가 않음)
  */
 
 const fs = require('fs');
 
 /**
  * 회극/비극에 따라 amount 계산하는 함수
- * @param {Object} perf 기본 공연 정보에 대한 정보
+ * @param {Object} performance 기본 공연 정보에 대한 정보
  * @param {Object} play 기본 공연 정보
  * @returns {number} 공연 요금
  */
-function amountFor(perf, play) {
+function amountFor(performance, play) {
   let result = 0;
 
   switch (play.type) {
     case 'tragedy': // 비극
       result = 40000;
-      if (perf.audience > 30) {
-        result += 1000 * (perf.audience - 30);
+      if (performance.audience > 30) {
+        result += 1000 * (performance.audience - 30);
       }
       break;
     case 'comedy': // 희극
       result = 30000;
-      if (perf.audience > 20) {
-        result += 10000 + 500 * (perf.audience - 20);
+      if (performance.audience > 20) {
+        result += 10000 + 500 * (performance.audience - 20);
       }
-      result += 300 * perf.audience;
+      result += 300 * performance.audience;
       break;
     default:
       throw new Error(`알 수 없는 장르: ${play.type}`);

@@ -1,9 +1,38 @@
 /**
- * 2-2) switch 내에 포함된 로직 분리하기 + 중첩 함수로 사용하기
- * - for문 내의 변수이기 때문에 중첩함수가 접근할 수가 없습니다.
+ * 2-3) 변수명 변경: thisAmount -> result로 변경
  */
 
 const fs = require('fs');
+
+/**
+ * 회극/비극에 따라 amount 계산하는 함수
+ * @param {Object} perf 기본 공연 정보에 대한 정보
+ * @param {Object} play 기본 공연 정보
+ * @returns {number} 공연 요금
+ */
+function amountFor(perf, play) {
+  let result = 0;
+
+  switch (play.type) {
+    case 'tragedy': // 비극
+      result = 40000;
+      if (perf.audience > 30) {
+        result += 1000 * (perf.audience - 30);
+      }
+      break;
+    case 'comedy': // 희극
+      result = 30000;
+      if (perf.audience > 20) {
+        result += 10000 + 500 * (perf.audience - 20);
+      }
+      result += 300 * perf.audience;
+      break;
+    default:
+      throw new Error(`알 수 없는 장르: ${play.type}`);
+  }
+
+  return result;
+}
 
 /**
  * 공연료 청구서를 출력하는 함수
@@ -22,39 +51,9 @@ function statement(invoice, plays) {
     minimumFractionDigits: 2,
   }).format;
 
-  /**
-   * 회극/비극에 따라 amount 계산하는 함수
-   * @param {Object} perf 기본 공연 정보에 대한 정보
-   * @param {Object} play 기본 공연 정보
-   * @returns {number} 공연 요금
-   */
-  function amountFor(perf, play) {
-    let thisAmount = 0;
-
-    switch (play.type) {
-      case 'tragedy': // 비극
-        thisAmount = 40000;
-        if (perf.audience > 30) {
-          thisAmount += 1000 * (perf.audience - 30);
-        }
-        break;
-      case 'comedy': // 희극
-        thisAmount = 30000;
-        if (perf.audience > 20) {
-          thisAmount += 10000 + 500 * (perf.audience - 20);
-        }
-        thisAmount += 300 * perf.audience;
-        break;
-      default:
-        throw new Error(`알 수 없는 장르: ${play.type}`);
-    }
-
-    return thisAmount;
-  }
-
   for (let perf of invoice.performances) {
     const play = plays[perf.playID];
-    let thisAmount = amountFor(perf, play); // 중첩함수여도 어짜피 매개변수로 보내야됨!
+    let thisAmount = amountFor(perf, play); // 해당 부분 별도 함수를 사용해서 값 추출!
 
     volumeCredits += Math.max(perf.audience - 30, 0); // 포인트 적립
     if (play.type === 'comedy') volumeCredits += Math.floor(perf.audience / 5); // 희극 관객 5명마다 추가포인트 지급

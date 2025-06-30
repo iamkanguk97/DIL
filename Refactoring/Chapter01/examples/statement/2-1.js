@@ -70,7 +70,7 @@ function statement(invoice, plays) {
 }
 
 // Main
-const plays = JSON.parse(fs.readFileSync('./data/plays.json', 'utf8'));
-const invoices = JSON.parse(fs.readFileSync('./data/invoices.json', 'utf8'));
+const plays = JSON.parse(fs.readFileSync('../data/plays.json', 'utf8'));
+const invoices = JSON.parse(fs.readFileSync('../data/invoices.json', 'utf8'));
 
 console.log(statement(invoices[0], plays));

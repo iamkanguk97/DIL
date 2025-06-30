@@ -1,5 +1,7 @@
 /**
  * 2-4)
+ * - play 변수 제거하기 (임시 변수를 질의 함수로 바꾸기) -> 변수 인라인하기
+ *  - 임시 변수들로 인해서 로컬 범위에 존재하는 이름이 늘어나서 추출 작업이 복잡해질 수 있습니다.
  */
 
 const fs = require('fs');
@@ -61,16 +63,14 @@ function statement(invoice, plays) {
   }
 
   for (let perf of invoice.performances) {
-    let thisAmount = amountFor(perf); // 해당 부분 별도 함수를 사용해서 값 추출!
-
     volumeCredits += Math.max(perf.audience - 30, 0); // 포인트 적립
     if (playFor(perf).type === 'comedy')
       volumeCredits += Math.floor(perf.audience / 5); // 희극 관객 5명마다 추가포인트 지급
 
-    result += `${playFor(perf).name}: ${format(thisAmount / 100)} (${
+    result += `${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${
       perf.audience
     }석)\n`;
-    totalAmount += thisAmount;
+    totalAmount += amountFor(perf);
   }
 
   result += `총액: ${format(totalAmount / 100)}\n`;

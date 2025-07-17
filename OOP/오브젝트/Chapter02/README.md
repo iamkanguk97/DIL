@@ -115,3 +115,61 @@
 메시지를 전송하는 것이 유일하게 특정 객체가 다른 객체와 상호작용 할 수 있는 방법입니다. 메세지를 수신한 객체는 스스로의 결정에 따라 자율적으로 메세지를 처리하게 되는데요, 이처럼 수신한 메세지를 처리하기 위한 자신만의 방법을 메서드라고 합니다.
 
 **Screening이 Movie에게 calculateMovieFee 메세지를 전송한다고 말할 수 있습니다. 하지만 Screening은 Movie안에 calculateMovieFee 메서드가 존재하고 있는지조차 모르고 Movie가 calculateMovieFee 메시지에 응답할 수 있다고 믿고 메시지를 전송할 뿐이라고 합니다.**
+
+<br/>
+
+## 할인 요금 구하기
+
+### 할인 요금 계산을 위한 협력 시작하기
+
+```ts
+calculateMovieFee(screening: Screening2): Money2 {
+    return this.fee.minus(this.discountPolicy.calculateDiscountAmount(screening));
+}
+```
+
+앞서 말했듯이 할인정책에는 크게 일정한 금액을 할인해주는 금액 할인 정책이 있고 다른 하나는 일정한 비율에 따라 할인 요금을 결정하는 비율 할인 정책이 있습니다.
+
+그래서 예매 요금을 계산하기 위해서는 현재 영화에 적용되어 있는 할인 정책의 종류를 판단할 수 있어야 하는데요, 해당 코드에서는 할인 정책을 판단하는 코드는 없고 단지 discountPolicy에게 메세지를 전송하고 있습니다.
+
+해당 코드는 객체지향과 아주 밀접한 관계를 가지고 있습니다.<br/>
+(상속, 다형성, 추상화)
+
+### 할인 정책과 할인 조건
+
+-   `DiscountPolicy` 라는 클래스는 `추상 클래스`를 사용하기로 했습니다.
+-   왜냐하면, 할인 정책은 크게 금액 할인정책과 비율 할인정책이 있는데 `DiscountPolicy`를 생성할 일은 없기 때문입니다.
+
+> [!IMPORTANT]
+>
+> -   `DiscountPolicy` 클래스는 할인 여부와 요금 계산에 필요한 전체적인 흐름은 정의하지만 실제로 요금을 계산하는 부분은 `getDiscountAmount` 추상 메서드를 통해 계산합니다.
+> -   실제로, DiscountPolicy를 상속받은 자식 클래스에서 Overriding 한 메서드가 실행될 것입니다.
+> -   이처럼 부모 클래스에 기본적인 알고리즘의 흐름을 구현하고 중간에 필요한 처리를 자식 클래스에게 위임하는 디자인 패턴을 `TEMPLATE METHOD` 패턴이라고 부릅니다.
+
+### 오버라이딩과 오버로딩
+
+-   `오버라이딩`
+    -   부모 클래스에 정의된 같은 이름, 같은 파라미터 목록을 가진 메서드를 자식 클래스에서 재정의하는 경우
+    -   자식 클래스의 메서드는 오버라이딩한 부모 클래스의 메서드를 가리키기 때문에 외부에서는 부모 클래스의 메서드가 보이지 않습니다.
+-   `오버로딩`
+    -   메서드의 이름은 같지만 제공되는 파라미터의 목록이 다릅니다.
+    -   오버로딩한 메서드는 원래의 메서드를 가리지 않기 때문에 메서드들이 공존합니다.
+
+```ts
+function add(a: number, b: number): number;
+function add(a: string, b: string): string;
+function add(a: number | string, b: number | string): number | string {
+    if (typeof a === 'number' && typeof b === 'number') {
+        return a + b;
+    }
+    if (typeof a === 'string' && typeof b === 'string') {
+        return a + b;
+    }
+    throw new Error('매개변수 타입이 올바르지 않습니다.');
+}
+
+// 사용 예시
+const sum = add(1, 2); // 3
+const sum2 = add(1, 'aa'); // ERROR!
+const combined = add('Hello, ', 'world!'); // 'Hello, world!'
+```

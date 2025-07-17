@@ -58,6 +58,6 @@ export class Screening2 {
      */
     private calculateFee(audienceCount: number): Money2 {
         // return this.movie.getFee().times(audienceCount);
-        return this.movie.calculateMovieFee().times(audienceCount);
+        return this.movie.calculateMovieFee(this).times(audienceCount);
     }
 }

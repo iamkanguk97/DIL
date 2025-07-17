@@ -1,5 +1,5 @@
 import { DiscountCondition } from './DiscountCondition';
-import { Screening2 } from './Screening';
+import { Screening2 } from '../Screening';
 
 /**
  * <순번 조건>

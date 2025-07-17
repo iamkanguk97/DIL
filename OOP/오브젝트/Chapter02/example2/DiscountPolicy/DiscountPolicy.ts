@@ -1,6 +1,6 @@
-import { Screening2 } from './Screening';
-import { DiscountCondition } from './DiscountCondition';
-import { Money2 } from './Money';
+import { Screening2 } from '../Screening';
+import { DiscountCondition } from '../DiscountCondition/DiscountCondition';
+import { Money2 } from '../Money';
 
 /**
  * 할인 정책
@@ -34,5 +34,5 @@ export abstract class DiscountPolicy {
     /**
      * 할인 요금 계산 메서드
      */
-    abstract getDiscountAmount(screening: Screening2): Money2;
+    protected abstract getDiscountAmount(screening: Screening2): Money2;
 }

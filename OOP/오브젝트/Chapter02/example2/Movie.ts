@@ -12,6 +12,7 @@ export class Movie2 {
     private title: string;
     private runningTime: number;
     private fee: Money2;
+    // private discountPolicy: DiscountPolicy | null;
     private discountPolicy: DiscountPolicy;
 
     constructor(title: string, runningTime: number, fee: Money2, discountPolicy: DiscountPolicy) {
@@ -34,8 +35,12 @@ export class Movie2 {
      *
      * 즉, 영화의 기본 요금에서 할인 금액을 뺀 금액을 반환함
      */
-    // TODO: 할인까지 적용된 금액을 반환하는 것이 Movie에서 하는게 맞을까?
+    // TODO: 굳이 calculateDiscountAmount에 screening을 넣어야 할까?
+    // - 상영쪽에 sequence를 비교하는 조건이 있기 때문에 넣을 수 있다고 생각함.
+    // DiscountPolicy가 nullable이었다가 수정한 이유? -> NoneDiscountPolicy를 추가했기 때문에
     calculateMovieFee(screening: Screening2): Money2 {
+        // -> 현재 ERROR 발생! (discountPolicy가 null일 가능성이 있기 때문에 해당 메서드로 접근이 불가능)
         return this.fee.minus(this.discountPolicy.calculateDiscountAmount(screening));
+        // return this.fee.minus(this.discountPolicy!.calculateDiscountAmount(screening));
     }
 }

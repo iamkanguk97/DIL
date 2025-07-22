@@ -25,28 +25,28 @@ export class Money2 {
     /**
      * 빼기 메서드
      */
-    minus(amount: Money2) {
+    minus(amount: Money2): Money2 {
         return new Money2(this.amount - amount.amount);
     }
 
     /**
      * 곱하기 메서드
      */
-    times(percent: number) {
+    times(percent: number): Money2 {
         return new Money2(this.amount * percent);
     }
 
     /**
      * 비교 메서드 (작은지 여부)
      */
-    isLessThan(other: Money2) {
+    isLessThan(other: Money2): boolean {
         return this.amount < other.amount;
     }
 
     /**
      * 비교 메서드 (크거나 같은지 여부)
      */
-    isGreaterThanOrEqual(other: Money2) {
+    isGreaterThanOrEqual(other: Money2): boolean {
         return this.amount >= other.amount;
     }
 }

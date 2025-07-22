@@ -57,7 +57,6 @@ export class Screening2 {
      * 요금 계산 메서드
      */
     private calculateFee(audienceCount: number): Money2 {
-        // return this.movie.getFee().times(audienceCount);
         return this.movie.calculateMovieFee(this).times(audienceCount);
     }
 }

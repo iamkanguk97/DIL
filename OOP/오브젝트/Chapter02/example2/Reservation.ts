@@ -10,6 +10,7 @@ export class Reservation {
      * - customer: 예약자
      * - screening: 상영
      * - fee: 예매 요금
+     *  - 할인까지 모두 완료되어 결제된 최종 금액
      * - audienceCount: 관객수
      */
     private customer: Customer2;
